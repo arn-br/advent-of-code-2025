@@ -31,7 +31,7 @@ def generate_invalid_in_range_p1(low, high):
 def part_1():
     res = 0
 
-    with open("input2.txt", "r") as f:
+    with open("input.txt", "r") as f:
         contents = f.read()
 
     ranges = [r.strip() for r in contents.split(",")]
@@ -89,7 +89,7 @@ def generate_invalid_in_range_p2(low, high):
 def part_2():
     res = 0
 
-    with open("input2.txt", "r") as f:
+    with open("input.txt", "r") as f:
         contents = f.read()
 
     ranges = [r.strip() for r in contents.split(",")]
