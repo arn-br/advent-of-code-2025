@@ -4,11 +4,11 @@ def int_to_list(int1):
 
 
 def find_max_two(l1):
-    num1 = max(l1[: (len(l1)-1)])
+    num1 = max(l1[: (len(l1)-1)]) #find the max number in the listm excluding the last digit
     
     index2 = l1.index(num1)
 
-    num2 = max(l1[(index2+1):])
+    num2 = max(l1[(index2+1):]) #find the second max number, following digits from the first max
 
     res = int(str(num1) + str(num2))
 
@@ -16,21 +16,24 @@ def find_max_two(l1):
 
 def first_twelve(l1: list):
     res = ""
-    num1 = max(l1[:(len(l1) - 10)])
+    num1 = max(l1[:(len(l1) - 10)]) #find the max digit ( 11 digits at the end excluded)
     index1 = l1.index(num1)
 
-    for n in range(index1):
+    for n in range(index1): #change every digit to 0 until to the  max digit
         l1[n] = 0
     l1[index1] = 0
-    res = str(num1)
 
-    for i in range(11):
+    res = str(num1) #add the digit to the result
+
+    for i in range(11): #follow the same logic here, until we have 12 digits
         
         num1 = max(l1[index1:(len(l1) - 10 + i)])
         index1 = l1.index(num1)
+
         for n in range(index1):
             l1[n] = 0
         l1[index1] = 0
+        
         res += str(num1)
 
     #print(res)
