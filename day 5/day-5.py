@@ -1,9 +1,13 @@
 def read_ranges_into_array(filename):
     """
-    Reads the ranges from the text file to a 2D array
+    Description:
+        Reads the ranges from the text file to a 2D array
 
-    input: filename
-    returns: 2d array
+    Args:
+        filename
+    
+    Returns:
+        matrix: 2d array with ranges
     """
     matrix = []
 
@@ -20,10 +24,14 @@ def read_ranges_into_array(filename):
 
 def read_ids_into_array(filename):
     """
-    Reads the ids from the text file to an array
-
-    input: filename
-    returns: array
+    Description:
+        Reads the ids from the text file to an array
+    
+    Args:
+        filename
+    
+    Returns:
+        matrix: an array with the ids
     """
     matrix = []
 
@@ -40,7 +48,15 @@ def read_ids_into_array(filename):
 
 def part1(ids, ranges):
     """
-    Goes through each range for each id, and checks if it is in the range
+    Description:
+        Goes through each range for each id, and checks if it is in the range
+
+    Args:
+        ids: array with ids
+        ranges: array with ranges
+    
+    Returns:
+        count: returns the count for valid ids
     """
     count = 0
     is_fresh = False
@@ -57,37 +73,31 @@ def part1(ids, ranges):
     
     return count
 
-def add_to_set(set1,ran):
-    current_set = set1
-    for number in range(ran[0], ran[1]+1):
-        if number not in current_set:
-            current_set.add(number)
-    
-    return current_set
-
 def part2(ranges):
-    if not ranges:
-        return 0
+    """
+    Description:
+        Goes through every range and calculates the total range
 
-    # sort ranges by start
-    ranges.sort(key=lambda x: x[0])
+    Args:
+        ranges: ranges from the file
+    
+    Returns:
+        total: total number of available id count
+    """
+    ranges.sort(key=lambda x: x[0]) #sorting the ranges based on the start
 
     total = 0
     current_start, current_end = ranges[0]
 
     for start, end in ranges[1:]:
-        if start <= current_end + 1:
-            # overlap or touching
+        if start <= current_end + 1: #checking if the ranges overlap
             current_end = max(current_end, end)
         else:
-            # finish previous range
             total += current_end - current_start + 1
             current_start, current_end = start, end
 
-    # add last range
     total += current_end - current_start + 1
 
-    print(total)
     return total
 
 def main():
