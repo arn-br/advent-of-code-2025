@@ -1,4 +1,10 @@
 def read_ranges_into_array(filename):
+    """
+    Reads the ranges from the text file to a 2D array
+
+    input: filename
+    returns: 2d array
+    """
     matrix = []
 
     with open(filename, "r") as f:
@@ -13,6 +19,12 @@ def read_ranges_into_array(filename):
     return matrix
 
 def read_ids_into_array(filename):
+    """
+    Reads the ids from the text file to an array
+
+    input: filename
+    returns: array
+    """
     matrix = []
 
     with open(filename, "r") as f:
@@ -27,6 +39,9 @@ def read_ids_into_array(filename):
     return matrix
 
 def part1(ids, ranges):
+    """
+    Goes through each range for each id, and checks if it is in the range
+    """
     count = 0
     is_fresh = False
 
@@ -40,7 +55,6 @@ def part1(ids, ranges):
             count += 1
             is_fresh = False
     
-    print(count)
     return count
 
 def add_to_set(set1,ran):
@@ -76,23 +90,9 @@ def part2(ranges):
     print(total)
     return total
 
-
-"""def part2(ranges):
-    results = set()
-
-    for range1 in ranges:
-        results = add_to_set(results, range1)
-        for number in range(range1[0], (range1[1]+1)):
-            results.add(number)
-
-    print(results)
-    print(len(results))
-
-    return len(results)"""
-
 def main():
-    #print("Part 1:")
-    #part1(read_ids_into_array("input.txt"), read_ranges_into_array("input.txt"))
+    print("Part 1:")
+    part1(read_ids_into_array("input.txt"), read_ranges_into_array("input.txt"))
 
     print("Part 2:")
     part2(read_ranges_into_array("input.txt"))
