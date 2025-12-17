@@ -36,13 +36,14 @@ def read_columns2(filename):
             current_character = current_row[i]
             value += str(current_character) #creating the number top to bottom
 
-        #if the value is made of spaces, enter a new column
+        #if the value is made of spaces, it will be a new column
         if value.strip() != "": 
             col.append(int(value))
         else:
             columns.append(col)
             col = []
 
+    #reading the operators for each column, from the last row
     operators = str(lines[len_rows-1])
     operators = operators.replace(" ", "")
     for m in range(len(operators)):
@@ -67,34 +68,6 @@ def calculate_column(columns):
 
     return results
 
-def transform_nums(columns):
-    print(columns)
-    for column in columns:
-        numbers = column[:-1]
-        op = column[-1]
-
-        new_nums = []
-        copied = numbers[:]
-
-        while copied:
-            new_number = ""
-            nexts = []
-
-            for n in copied:
-                new_number += str(n % 10)
-                n //= 10
-                if n > 0:
-                    nexts.append(n)
-            
-            new_nums.append(int(new_number))
-            copied = nexts
-
-
-        column[:] = new_nums +[op]
-
-    print(columns)            
-    return columns
-
 def part1(filename):
     total = sum(calculate_column(read_columns(filename)))
 
@@ -106,8 +79,8 @@ def part2(filename):
     print(total)
 
 def main():
-    #print("Part 1:")
-    #part1("test.txt")
+    print("Part 1:")
+    part1("inputt.txt")
 
     print("Part 2:")
     part2("input.txt")
