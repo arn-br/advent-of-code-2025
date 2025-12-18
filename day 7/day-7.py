@@ -60,7 +60,6 @@ def part2(arr):
 def main():
     print("Part 1:")
     part1(read_into_array("input.txt"))
-    print(read_into_array("test.txt"))
 
     print("Part 2:")
     part2(read_into_array("input.txt"))
