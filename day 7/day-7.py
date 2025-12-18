@@ -14,6 +14,13 @@ def split_beam(pos_row, pos_column, arr):
 
     return arr
 
+def split_beam_w_count(c, count):
+    count[c-1] += count[c]
+    count[c+1] += count[c]
+    count[c] = 0
+    
+    return count
+
 def part1(arr):
     count = 0
 
@@ -33,13 +40,30 @@ def part1(arr):
 
     print(count)
 
+def part2(arr):
+    count = [0] * len(arr[0])
+
+    for r in range(len(arr)):
+        for c in range(len(arr[r])):
+
+            #find the start
+            if arr[r][c] == "S":
+                count[c] = 1
+            #if there's a split, check if it has incoming beam and split with the possibilities
+            elif arr[r][c] == "^" and count[c] != 0:
+                count = split_beam_w_count(c, count)
+
+    print(sum(count))
+
+
+
 def main():
     print("Part 1:")
     part1(read_into_array("input.txt"))
-    #print(read_into_array("test.txt"))
+    print(read_into_array("test.txt"))
 
-    #print("Part 2:")
-    #part2(read_into_array())
+    print("Part 2:")
+    part2(read_into_array("input.txt"))
 
 if __name__ == "__main__":
     main()
