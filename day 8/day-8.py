@@ -71,9 +71,6 @@ def get_first_n_paths(n, arr):
 
     res = distances.get_results()
 
-    """for dist, p1, p2 in res:
-        print(p1, p2)
-    """
     return res
 
 def part1(n, filename):
@@ -85,7 +82,6 @@ def part1(n, filename):
     for dist, p1, p2 in first_n_dist:
         unions.union(p1, p2)
     
-
     sizes = {}
     for i in range(len(unions.parent)):
         root = unions.find(i)
@@ -100,14 +96,41 @@ def part1(n, filename):
     
     print(result)
 
+def part2(filename):
+    arr = read_into_array(filename)
+
+    n = len(arr)
+    connections = int(n * (n-1) / 2) #handshake probability question logic
+
+    first_n_dist = get_first_n_paths(connections, arr)
+
+    unions = UnionFind(len(arr))
+
+    for dist, p1, p2 in first_n_dist:
+        unions.union(p1, p2)
+    
+        sizes = {}
+        for i in range(len(unions.parent)):
+            root = unions.find(i)
+            sizes[root] = sizes.get(root, 0) + 1
+
+        sizes_all = list(sizes.values())
+        #print(sizes_all)
+
+        if len(sizes_all)==1:
+            print(arr[p1], arr[p2]) 
+            x1 = arr[p1][0]
+            x2 = arr[p2][0]
+            break
+
+    print(x1*x2)
 
 def main():
     print("Part 1:")
-    #part1(read_into_array("input.txt"))
     part1(1000, "input.txt")
 
-    #print("Part 2:")
-    #part2(read_into_array("input.txt"))
+    print("Part 2:")
+    part2("input.txt")
 
 if __name__ == "__main__":
     main()
